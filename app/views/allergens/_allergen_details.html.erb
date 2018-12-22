@@ -1,8 +1,7 @@
-<!-- When a partial is called with a pluralized collection, then the individual instances of the partial have access to the member of the collection being rendered via a variable named after the partial -->
+<!-- When a partial is called with a pluralized collection, then the individual instances of the partial have access to the member of the collection being rendered via a variable named after the partial -- in this case "allergen_details" should be used as though it were simply "allergen"-->
 <% substances = allergen_details.get_substances %>
   <div class="col-md-3">
     <!-- Panel displaying allergen and substances -->
-
     <div class="panel">
       <div class="panel-heading">
         <div class="btn-group">
