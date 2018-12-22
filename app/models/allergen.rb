@@ -24,6 +24,10 @@ class Allergen < ApplicationRecord
     return self.substances.split(';')
   end
 
+  def category_in_substances
+
+  end
+
   # After allergen has been created or updated (and saved) check all products for
   # this allergen
   after_save do |allergen|

@@ -1,8 +1,8 @@
 <h1 class="center-heading label-color">Add a Product</h1>
 <%= render 'shared/errors', obj: @product %>
 <!-- would provide the @product object to the partial, available under the local variable obj -->
-<%= render 'shared/form', obj: @product %>
+<%= render 'form' %>
 
 <script>
-  setupForm('product');
+  formStyle()
 </script>

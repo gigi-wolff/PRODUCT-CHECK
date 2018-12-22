@@ -2,8 +2,8 @@
 
 <%= render 'shared/errors', obj: @allergen %>
 <!-- would provide the @allergen object to the partial, available under the local variable obj -->
-<%= render 'shared/form', obj: @allergen %>
+<%= render 'form'%>
 
 <script>
-  setupForm('allergen');
+  formStyle()
 </script>

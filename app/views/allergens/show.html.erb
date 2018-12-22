@@ -1,1 +1,20 @@
-<%= render partial: "shared/allergen_target", collection: [@allergen] %>
+<div class='row'>
+  <div class='form-horizontal col-lg-6 col-lg-offset-3'>
+    <div class="panel-small">
+      <div class="panel-heading-small">
+        <div class="btn-group">
+          <button type="button" class="btn btn-lg btn-my-primary btn-disabled" >
+            <%= @allergen.category %>
+          </button>
+        </div>
+      </div>
+      <div class="panel-body-small">
+          <% @allergen.get_substances.each do |substance| %>
+          <div class="substances text-color-not-ok">
+            <%= substance %>
+          </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

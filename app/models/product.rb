@@ -17,7 +17,7 @@ class Product < ApplicationRecord
 
   # The model should be able to answer the question "Can user x do y to this object?"
   # When you write regular methods in the model those methods are all instance methods.  
-  # In other words def some_method will be a method available on each retrieved record
+  # In other words def some_method will be a method available on each retrieved product record
   def get_ingredients 
     # get rid of all characters that are not: a-z A-Z 0-9 - [] () . ' / , blank;
     clean_ingredients = self.ingredients.gsub(%r{[^a-zA-Z0-9\-\[\]\.\,\'\(\)\/\s]}, '')
@@ -32,40 +32,26 @@ class Product < ApplicationRecord
     end
   end
 
-  def create_reaction(allergen,ingredient,substances)
-    Reaction.create(product_id: self.id, 
-      allergen_id: allergen.id, 
-      reactive_substances: substances,
-      reactive_ingredient: ingredient.upcase,
-      user_id: self.user_id)
-  end
-
-  def destroy_product_reaction
-    Reaction.where("product_id = ? AND user_id = ?", self.id, self.user_id).destroy_all
-  end
-
   def check_for_allergens
     #require "pry"
 
-    # If product exists in Reaction db, delete it so there aren't conflicting
-    # results
-    unless self.causes_reaction.empty?
-      self.destroy_product_reaction
-    end
-
     # test each ingredient in product
     self.get_ingredients.each do |ingredient|
-      # check each ingredient against substances in each allergen category 
-      allergens_causing_reactions = Allergen.where "user_id = ? AND substances ILIKE ?", self.user_id, "%#{ingredient}%"
-      # if ingredient matches allergens in db
-      unless allergens_causing_reactions.empty? 
-        # for each allergen that contains a substance(s) that matches an ingredient
-        allergens_causing_reactions.each do |allergen|
+      # create an array of allergen categories which contain substance that match the ingredient
+      allergen_categories_causing_reactions = Allergen.where "user_id = ? AND substances ILIKE ?", self.user_id, "%#{ingredient}%"
+      unless allergen_categories_causing_reactions.empty? 
+        # check each allergen that contains a substance(s) that matches an ingredient
+        allergen_categories_causing_reactions.each do |allergen_category|
           # add only those matching substances to the Reaction db
-          allergen_substances_matching_ingredient = allergen.get_substances.select {|substance| substance.upcase.include?(ingredient.upcase)}.join(';')
+          allergen_substances_matching_ingredient =
+           allergen_category.get_substances.select {|substance| substance.upcase.include?(ingredient.upcase)}.join(';')
           unless allergen_substances_matching_ingredient.blank?
-            #logger.info("    ----- matching substances: #{allergen_substances_matching_ingredient[0]} -- ")
-            self.create_reaction(allergen,ingredient,allergen_substances_matching_ingredient)
+            # logger.info("!!!!!!!!----- matching substances: #{allergen_substances_matching_ingredient} -- ")
+            Reaction.create(product_id: self.id, 
+            allergen_id: allergen_category.id, 
+            reactive_substances: allergen_substances_matching_ingredient,
+            reactive_ingredient: ingredient.upcase,
+            user_id: self.user_id)
           end
         end
       end
@@ -73,10 +59,15 @@ class Product < ApplicationRecord
     
   end
 
+
   # After product has been created or updated (and saved) check if product contains allergens
   # and modify Reaction db accordingly
   after_save do
-   check_for_allergens
+    # Clear Reaction db of this product if it already exists
+    unless self.causes_reaction.empty?
+      Reaction.where("product_id = ? AND user_id = ?", self.id, self.user_id).destroy_all
+    end
+    check_for_allergens
   end
 
 end
