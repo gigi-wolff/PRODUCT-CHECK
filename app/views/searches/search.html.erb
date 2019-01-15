@@ -10,19 +10,19 @@
         </div>
       </div>
     <% else %>
-      <% allergen_search_results = search_all_allergens(@search_item, @user_id) %>
-      <% product_search_results = search_all_products(@search_item, @user_id) %>
-      <% reaction_search_results = search_reactions_for(@search_item, @user_id) %>
-      <% unless product_search_results.empty? %>
+      <% allergic_products = search_all_allergens(@search_item, @user_id) %>
+      <% products = search_all_products(@search_item, @user_id) %>
+      <% reactive_products = search_reactions_for(@search_item, @user_id) %>
+      <% unless products.empty? %>
         <table class="table">
           <tr colspan="2">
             <th>Product</th>
             <th class='center'>Ingredients</th>
           </tr>
-          <%= render partial: "shared/product", collection: product_search_results, :locals => {:index_view => false, search_item: @search_item}  %>
+          <%= render partial: "shared/product", collection: products, :locals => {:index_view => false, search_item: @search_item}  %>
         </table>
       <% end %>
-      <% unless reaction_search_results.empty? %>
+      <% unless reactive_products.empty? %>
         <table class="table">
           <tr colspan="4">
             <th class='center'>Products:</th>
@@ -31,19 +31,22 @@
             <th class='center'>Substances in Category:</th>
           </tr>
           <tr>
-            <%= render partial: "shared/reactive_product", collection: reaction_search_results, :locals => {search_item: @search_item}%>
+            <%= render partial: "shared/reactive_product", collection:reactive_products, :locals => {search_item: @search_item}%>
           </tr>
-          </table>
+        </table>
       <% end %>
-      <% unless allergen_search_results.empty? %>
+      <% unless allergic_products.empty? %>
         <div class="row">
           <div class="col-lg-4 col-lg-offset-4">
-            <%= render partial: "shared/allergen_target", collection: allergen_search_results, :locals => {search_item: @search_item}  %>
+            <%= render partial: "shared/allergen", collection: allergic_products, :locals => {search_item: @search_item}  %>
           </div>
         </div>
+       <script>
+        centerPanel()
+       </script>
       <% end %>
       <!-- Search item not found in Product and Allergen db -->
-      <% if allergen_search_results.empty? && product_search_results.empty? && reaction_search_results.empty? %>
+      <% if allergic_products.empty? && products.empty? && reactive_products.empty? %>
         <div class="col-xs-8 col-xs-offset-2">
           <div class="alert-success">
             <h2 class="center">

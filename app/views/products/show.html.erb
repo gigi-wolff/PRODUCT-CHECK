@@ -28,7 +28,7 @@
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <%= render partial: 'shared/allergen_target', collection: reactive_allergens, :locals => {search_item: current_ingredient}  %>
+              <%= render partial: 'shared/allergen', collection: reactive_allergens, :locals => {search_item: current_ingredient}  %>
             </div>
           </div>
         </td>
@@ -52,5 +52,7 @@
   <%= link_to "Delete this product", product_path(@product), method: :delete,
     data: { confirm: "Are you sure you want to delete the product?"},
     class: "btn btn-xlarge btn-danger" %>
+  <%= link_to "Add another product", new_product_path(@product), class: "btn btn-xlarge btn-primary" %>
+
   <%= link_to "View all products", products_path, class: "btn btn-xlarge btn-success" %>
 </div>

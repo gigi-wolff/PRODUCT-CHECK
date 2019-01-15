@@ -1,12 +1,23 @@
 function handleShow(event){}
 
+function centerPanel() {
+  // To replace all existing classes with one or more new classes, set the className attribute:
+  
+  document.getElementById("panel-allergen-details").className = "col-lg-6 col-lg-offset-3";
+  document.getElementById("allergen-panel-body").style.height = "fit-content";
+
+  // alert('in centerpanel');
+  return;
+}
+
+
 function formStyle() {
 
   document.getElementById('form-input').style.height = "50px";
   document.getElementById('form-input').style.fontSize = "18pt";
   document.getElementById('form-textarea').style.height = "250px";
   document.getElementById('form-textarea').style.fontSize = "18pt";
-
+  // alert('in formStyle');
   // var label = document.getElementsByClassName('form-label');
 
   if (1<0) {

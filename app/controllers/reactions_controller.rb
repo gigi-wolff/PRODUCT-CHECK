@@ -6,7 +6,7 @@ class ReactionsController < ApplicationController
 
   def index
     # reactive_product is an array of ALL product_ids in Reaction db for current user
-    @reactive_product = Reaction.where("user_id = ?", current_user).pluck(:product_id).uniq
+    @reactive_products = Reaction.where("user_id = ?", current_user).pluck(:product_id).uniq
     render 'reactions/index'
   end
 

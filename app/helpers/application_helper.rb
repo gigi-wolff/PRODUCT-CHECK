@@ -26,8 +26,7 @@ module ApplicationHelper
   
   def search_all_reactions(search_item, user_id)
     # postgres uses ILIKE, sqlite3 uses LIKE:
-    user_reactions = Reaction.where "user_id = ?", user_id
-    return user_reactions.where "reactive_ingredient ILIKE ? OR reactive_substances ILIKE ?", "#{search_item}", "#{search_item}"
+    return Reaction.where "user_id = ? AND reactive_ingredient ILIKE ? OR reactive_substances ILIKE ?",user_id, "#{search_item}", "#{search_item}"
   end
 
   def search_reactions_for(search_item, user_id)
@@ -48,7 +47,7 @@ module ApplicationHelper
       end
     end
 
-    return reactive_product_ids
+    return reactive_product_ids.uniq
   end
 
     def get_all_product_reactions(product_id)
