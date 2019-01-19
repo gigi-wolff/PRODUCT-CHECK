@@ -18,10 +18,10 @@
     <!-- if ingredient causes reaction -->
     <% unless ingredient_search_results.empty? %>
       <tr>
-        <td class="show-ingredient-name add-padding background-color-not-ok">
+        <td class="show-ingredient-name background-color-not-ok">
           <%= current_ingredient %>
         </td>
-        <td class="add-padding background-color-not-ok">
+        <td class="background-color-not-ok">
           <% reactive_allergens = Allergen.find(ingredient_search_results.pluck(:allergen_id)) %>
           <div class="center-glyphicon text-color-not-ok">
             <span class="glyphicon glyphicon-ban-circle"></span>
@@ -29,6 +29,9 @@
           <div class="row">
             <div class="col-lg-12">
               <%= render partial: 'shared/allergen', collection: reactive_allergens, :locals => {search_item: current_ingredient}  %>
+              <script>
+                panelOnProductPage()
+              </script>
             </div>
           </div>
         </td>
@@ -36,7 +39,7 @@
     <% else %>
       <!-- ingredient does not cause a reaction -->
       <tr>
-        <td class="show-ingredient-name add-padding text-color-ok">
+        <td class="show-ingredient-name text-color-ok">
           <%= current_ingredient %>
         </td>
         <td class="center-glyphicon text-color-ok">

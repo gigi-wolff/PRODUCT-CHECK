@@ -1,6 +1,4 @@
-<div id="center-allergen-panel">
-  <%= render partial: 'shared/allergen', collection: Array(@allergen), :locals => {search_item: ""}  %>
-</div>
+<%= render partial: 'shared/allergen', collection: Array(@allergen), :locals => {search_item: ""}  %>
 <script>
-  centerPanel()
+  centerPanelOnPage()
 </script>

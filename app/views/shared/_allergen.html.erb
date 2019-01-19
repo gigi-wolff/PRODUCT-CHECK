@@ -1,9 +1,10 @@
-<!-- When a partial is called with a pluralized collection, then the individual instances of the partial have access to the member of the collection being rendered via a variable named after the partial -- individual instance: "allergen", partial name: "allergens" -->
+<!-- When a partial is called with a pluralized collection (ie: collection: @allergens), then the individual instances of the partial have access to the member of the collection being rendered via a variable named after the partial (allergen). In general 
+if the partial is called with using "collection: somenames" and partial name is "some_partial" then to access an individual instance of "somenames" would be "some_partial"-->
 <% substances = allergen.get_substances %>
 <div id="panel-allergen-details" class="col-md-3">
   <!-- Panel displaying allergen and substances -->
-  <div class="panel">
-    <div class="panel-heading">
+  <div id="panel">
+    <div id="panel-heading">
       <div class="btn-group">
         <button type="button" class="btn btn-my-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= allergen.category %>  <span class="glyphicon glyphicon-menu-down"></span>
@@ -15,7 +16,7 @@
         </ul>
       </div>
     </div>
-    <div id="allergen-panel-body" class="panel-body">
+    <div id="panel-body">
       <% substances.each do |substance| %>
         <% if substance.upcase.include?(search_item.upcase)%> 
           <div class="substances text-color-not-ok">

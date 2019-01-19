@@ -1,15 +1,31 @@
 function handleShow(event){}
 
-function centerPanel() {
+function centerPanelOnPage() {
   // To replace all existing classes with one or more new classes, set the className attribute:
   
   document.getElementById("panel-allergen-details").className = "col-lg-6 col-lg-offset-3";
-  document.getElementById("allergen-panel-body").style.height = "fit-content";
+  document.getElementById('panel').style.boxShadow = "";
+  document.getElementById('panel').style.height = "auto";
+  document.getElementById('panel-body').style.height = "auto";
 
-  // alert('in centerpanel');
+   // alert('in centerPanelOnPage e=' + e[0]);
   return;
 }
 
+function panelOnProductPage() {
+  // To replace all existing classes with one or more new classes, set the className attribute:
+  
+  document.getElementById("panel-allergen-details").className = "col-lg-12";
+  document.getElementById('panel').style.height = "auto";
+  document.getElementById('panel').style.boxShadow = "";
+  document.getElementById('panel-body').style.height = "auto";
+  // document.getElementById('panel-body').style.margin = "15px";
+  // document.getElementById('panel-body').style.padding = "15px";
+
+
+  // alert('in panelOnProductPage');
+  return;
+}
 
 function formStyle() {
 
