@@ -5,21 +5,26 @@
   <% search_item = product_reactions.select(:reactive_ingredient).distinct.pluck(:reactive_ingredient) %> 
 <% end %>
 
-
-<tr class="product-index">
-  <td class="<%= product_reactions.empty? ? 'text-color-ok' : 'text-color-not-ok' %>">
-    <%= highlight(product.name, search_item) %>
+<tr class = "<%= product_reactions.empty? ? 'text-color-ok' : 'text-color-not-ok' %>">
+  <td>
+    <div id="actions">
+      <a href="/products/<%= product.id %>/edit">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </a>
+      <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/products/<%= product.id %>">
+        <span class="glyphicon glyphicon-trash"></span>
+      </a>
+      <a href="/products/<%= product.id %>">
+        <span class="glyphicon glyphicon-eye-open"></span>
+      </a>
+    </div>
+    <a style="text-decoration:none; color:currentColor;" href="/products/<%= product.id %>"  >
+      <%= highlight(product.name, search_item) %>
+    </a>
   </td>
-  <td class="<%= product_reactions.empty? ? 'text-color-ok' : 'text-color-not-ok' %>">
-    <%= highlight(product.ingredients, search_item) %>
+  <td>
+    <a style="text-decoration:none; color:currentColor;" href="/products/<%= product.id %>"  >
+      <%= highlight(product.ingredients, search_item) %>
+    </a>
   </td>
-  <% if index_view %>     
-    <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Show', product_path(product) %></td>
-    <!-- <td><a href="/products/<%= product.id %>" onclick="return handleShow(event);">Show</a> -->
-    <td><%= link_to 'Delete', product_path(product), method: :delete, data: {confirm: "Are you sure?"} %></td>
-  <% end %>
 </tr>
-  
-
-

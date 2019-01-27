@@ -1,6 +1,6 @@
 function handleShow(event){}
 
-function centerPanelOnPage() {
+function largePanel() {
   // To replace all existing classes with one or more new classes, set the className attribute:
   
   document.getElementById("panel-allergen-details").className = "col-lg-6 col-lg-offset-3";
@@ -8,8 +8,12 @@ function centerPanelOnPage() {
   document.getElementById('panel').style.height = "auto";
   document.getElementById('panel-body').style.height = "auto";
 
-   // alert('in centerPanelOnPage e=' + e[0]);
+   // alert('in largePanel e=' + e[0]);
   return;
+}
+
+function tableRowColor(no_allergens) {
+  alert('tableRowColor ' + no_allergens);
 }
 
 function panelOnProductPage() {

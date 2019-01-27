@@ -10,7 +10,7 @@
         </div>
       </div>
     <% else %>
-      <% allergic_products = search_all_allergens(@search_item, @user_id) %>
+      <% allergens = search_all_allergens(@search_item, @user_id) %>
       <% products = search_all_products(@search_item, @user_id) %>
       <% reactive_products = search_reactions_for(@search_item, @user_id) %>
       <% unless products.empty? %>
@@ -35,18 +35,18 @@
           </tr>
         </table>
       <% end %>
-      <% unless allergic_products.empty? %>
+      <% unless allergens.empty? %>
         <div class="row">
           <div class="col-lg-4 col-lg-offset-4">
-            <%= render partial: "shared/allergen", collection: allergic_products, :locals => {search_item: @search_item}  %>
+            <%= render partial: "shared/allergen", collection: allergens, :locals => {search_item: @search_item}  %>
           </div>
         </div>
        <script>
-        centerPanelOnPage()
+        largePanel()
        </script>
       <% end %>
       <!-- Search item not found in Product and Allergen db -->
-      <% if allergic_products.empty? && products.empty? && reactive_products.empty? %>
+      <% if allergens.empty? && products.empty? && reactive_products.empty? %>
         <div class="col-xs-8 col-xs-offset-2">
           <div class="alert-success">
             <h2 class="center">
