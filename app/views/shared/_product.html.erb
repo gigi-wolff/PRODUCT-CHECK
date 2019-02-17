@@ -1,13 +1,13 @@
 <!-- if invoked from search.html.erb, then there will be a search_item passed in -->
 <% product_reactions = product.causes_reaction %>
 
-<% if product_reactions.any? %>
+<% if product.causes_reaction.any? %>
   <% search_item = product_reactions.select(:reactive_ingredient).distinct.pluck(:reactive_ingredient) %> 
 <% end %>
 
 <tr class = "<%= product_reactions.empty? ? 'text-color-ok' : 'text-color-not-ok' %>">
   <td>
-    <div id="actions">
+    <div class="actions">
       <a href="/products/<%= product.id %>/edit">
         <span class="glyphicon glyphicon-pencil"></span>
       </a>
