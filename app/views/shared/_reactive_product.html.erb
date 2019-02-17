@@ -1,6 +1,19 @@
 <% reactions_to_product = get_all_product_reactions(reactive_product) %>
+
 <tr class="text-color-not-ok">
   <td>
+    <% product_id = Product.find(reactive_product).id %>
+    <div class="actions">
+      <a href="/products/<%= product_id %>/edit">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </a>
+      <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/products/<%= product_id %>">
+        <span class="glyphicon glyphicon-trash"></span>
+      </a>
+      <a href="/products/<%= product_id %>">
+        <span class="glyphicon glyphicon-eye-open"></span>
+      </a>
+    </div>
     <%= Product.find(reactive_product).name %>
   </td>
   <td>
