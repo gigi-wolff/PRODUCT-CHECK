@@ -7,13 +7,13 @@ if the partial is called with using "collection: somenames" and partial's name i
     <div id="panel-heading">
       <span class="badge"><h4><%= allergen.category %></h4></span>
       <div class="actions">
-        <a href="/allergens/<%= allergen.id %>/edit">
+        <a class="edit-icon" href="/allergens/<%= allergen.id %>/edit">
           <span class="glyphicon glyphicon-pencil"></span>
         </a>
-        <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/allergens/<%= allergen.id %>">
+        <a class="delete-icon" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/allergens/<%= allergen.id %>">
           <span class="glyphicon glyphicon-trash"></span>
         </a>
-        <a href="/allergens/<%= allergen.id %>">
+        <a class="show-icon" href="/allergens/<%= allergen.id %>">
           <span class="glyphicon glyphicon-eye-open"></span>
         </a>
       </div>
