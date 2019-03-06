@@ -36,21 +36,16 @@
         </table>
       <% end %>
       <% unless allergens.empty? %>
-        <div class="row">
-          <div class="col-lg-4 col-lg-offset-4">
+          <div class="row">
             <%= render partial: "shared/allergen", collection: allergens, :locals => {search_item: @search_item}  %>
           </div>
-        </div>
-       <script>
-        largePanel()
-       </script>
       <% end %>
       <!-- Search item not found in Product and Allergen db -->
       <% if allergens.empty? && products.empty? && reactive_products.empty? %>
         <div class="col-xs-8 col-xs-offset-2">
           <div class="alert-success">
             <h2 class="center">
-              <%= @search_item %> Not Found
+              <%= @search_item %> Not Found in Allergens or Product List
             </h2>
           </div>
         </div>
