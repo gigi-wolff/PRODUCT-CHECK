@@ -12,7 +12,8 @@ default: &default
 development:
   <<: *default
   #database: db/development.sqlite3
-  database: allergen_eval_developement
+  database: product_check_developement
+
   username: Gigi
   password: nostrand
 
@@ -22,7 +23,7 @@ development:
 test:
   <<: *default
   #database: db/test.sqlite3
-  database: allergen_eval_test
+  database: product_check_test
   username: Gigi
   password: nostrand
 

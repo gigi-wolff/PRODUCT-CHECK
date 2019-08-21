@@ -6,7 +6,7 @@
     </div>
     <div id="panel-body">
       <% substances.each do |substance| %>
-        <% if substance.upcase.include?(search_item.upcase)%> 
+        <% if (substance.upcase.include?(search_item.upcase) || search_item.upcase.include?(substance.upcase)) %> 
           <div class="substances text-color-not-ok">
             <%= highlight(substance, search_item) %> 
           </div> 
